@@ -9,11 +9,11 @@ require 'shellwords'
 def current_directory
   @current_directory ||=
     if __FILE__ =~ %r{\Ahttps?://}
-      tempdir = Dir.mktmpdir("uu-rails-api-template-")
+      tempdir = Dir.mktmpdir("general_rails_template-")
       at_exit { FileUtils.remove_entry(tempdir) }
       git :clone => [
         "--quiet",
-        "https://github.com/skookum/uu-rails-api-template.git",
+        "https://github.com/mlsquires/general_rails_template.git",
         tempdir
       ].map(&:shellescape).join(" ")
 
@@ -42,8 +42,8 @@ remove_file "Gemfile"
 # disable this while proofing out the template (rebuilding nokigiri
 # takes way too long
 
-#empty_directory ".bundle"
-#copy_file "templates/bundle_config", ".bundle/config"
+empty_directory ".bundle"
+copy_file "templates/bundle_config", ".bundle/config"
 
 copy_file "templates/Gemfile", "Gemfile"
 
