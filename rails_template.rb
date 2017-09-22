@@ -1,5 +1,5 @@
 require 'shellwords'
-require 'dir'
+require 'tmpdir'
 #
 # Add this template directory to source_paths so that Thor actions like
 # copy_file and template resolve against our source files. If this file was
