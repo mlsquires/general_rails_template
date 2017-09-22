@@ -1,0 +1,3 @@
+DROP ROLE <%= app_name %>_owner;
+CREATE ROLE <%= app_name %>_owner SUPERUSER LOGIN CREATEDB PASSWORD 'BogusPassword';
+

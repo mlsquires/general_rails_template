@@ -1,0 +1,5 @@
+# DON'T CHECK THIS IN
+---
+BUNDLE_BIN: "../bin"
+BUNDLE_DISABLE_SHARED_GEMS: "true"
+BUNDLE_PATH: "vendor/bundle"

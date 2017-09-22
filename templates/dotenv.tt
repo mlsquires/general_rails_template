@@ -1,0 +1,13 @@
+
+# database
+export <%= app_name.upcase %>_DATABASE_USERNAME='<%= app_name %>_owner'
+export <%= app_name.upcase %>_DATABASE_PASSWORD='BogusPassword'
+export <%= app_name.upcase %>_DATABASE_NAME='<%= app_name %>_development'
+export <%= app_name.upcase %>_DATABASE_HOST='localhost'
+export <%= app_name.upcase %>_DATABASE_PORT=5432
+export <%= app_name.upcase %>_DATABASE_URL="postgres://$<%= app_name.upcase %>_DATABASE_USERNAME:$<%= app_name.upcase %>_DATABASE_PASSWORD@$<%= app_name.upcase %>_DATABASE_HOST/$<%= app_name.upcase %>_DATABASE_NAME"
+
+# service settings
+export RAILS_ENV='development'
+export PORT=4080
+

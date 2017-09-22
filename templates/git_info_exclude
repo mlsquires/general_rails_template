@@ -1,0 +1,11 @@
+
+# MLS scratch files
+files.lst
+generate.txt
+rake.txt
+rails.txt
+routes.txt
+spec_dirs.txt
+
+# Intellij, RubyMine, WebStorm user-specific configuration
+.idea/workspace.xml
