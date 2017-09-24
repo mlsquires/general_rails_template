@@ -1,6 +1,6 @@
 # Rails Application Template
 
-Loosely Based on the rails template at: https://github.com/Skookum/uu-rails-template
+Loosely Based on the rails template at: https://github.com/Skookum/uu-rails-api-template
 
 * Rspec, Guard, Pry (byebug), SimpleCov
 * Puma
@@ -8,6 +8,10 @@ Loosely Based on the rails template at: https://github.com/Skookum/uu-rails-temp
 The template will generate the Rspec files and initialize guard.
 
 ## How to Use
+
+    rails new service_name -m https://raw.githubusercontent.com/mlsquires/general_rails_template/master/rails_template.rb
+
+or
 
     rails new app_name -m <path-to>/rails_template.rb
 
