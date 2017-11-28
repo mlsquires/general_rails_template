@@ -9,5 +9,5 @@ export <%= app_name.upcase %>_DATABASE_URL="postgres://$<%= app_name.upcase %>_D
 
 # service settings
 export RAILS_ENV='development'
-export PORT=4080
+export PORT=3000
 

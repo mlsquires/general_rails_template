@@ -24,28 +24,20 @@ def current_directory
     end
 end
 
-def source_paths
-  Array(super) + [current_directory]
-end
 #
 # Add this template directory to source_paths so that Thor actions like
 # copy_file and template resolve against our source files. If this file was
 # invoked remotely via HTTP, that means the files are not present locally.
 # In that case, use `git clone` to download them to a local temporary dir.
+#
+def source_paths
+  Array(super) + [current_directory]
+end
 
 remove_file "README.md"
 template "templates/README.md.tt", "README.md"
 
-copy_file "templates/ruby_version", ".ruby_version"
-
 remove_file "Gemfile"
-# set bundler up to install all of the gems in the vendor directory
-# disable this while proofing out the template (rebuilding nokigiri
-# takes way too long
-
-empty_directory ".bundle"
-copy_file "templates/bundle_config", ".bundle/config"
-
 copy_file "templates/Gemfile", "Gemfile"
 
 remove_file ".gitignore"
@@ -54,13 +46,27 @@ copy_file "templates/gitignore", ".gitignore"
 remove_file "config/database.yml"
 template "templates/config/database.yml.tt", "config/database.yml"
 
+template "templates/Dockerfile.tt", "Dockerfile"
+
 after_bundle do
+  # the .bundle/config has BUNDLE_DISABLE_SHARED_GEMS set to false,
+  # which installs/uses gems from their standard version (e.g.,
+  # system ruby, rbenv version, etc).
+  #
+  # If you are using Docker or if you don't mind sharing gems
+  # on a system, this is what you want. If you want to isolate
+  # your application from others on your system, change this
+  # to true
+  #
+  empty_directory ".bundle"
+  copy_file "templates/bundle_config", ".bundle/config"
+
   remove_dir "test"
 
   run "spring stop"
-  run "bundle install"
   generate "rspec:install"
   generate "teaspoon:install"
+  generate "serviceworker:install"
 
   run "bundle exec guard init"
   remove_file ".rubocop.yml"
@@ -100,12 +106,9 @@ after_bundle do
 
   # Health Check route
   generate(:controller, "health index")
-#  route "root to: \"health#index\""
+  route "root to: \"health#index\""
 
   git :init
-  empty_directory ".git/info"
-  copy_file "templates/git_info_exclude", ".git/info/exclude"
   git add: "."
   git commit: "-a -m 'Initial commit'"
 end
-

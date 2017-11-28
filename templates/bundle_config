@@ -1,5 +1,15 @@
 # DON'T CHECK THIS IN
+#
+# This .bundle/config has BUNDLE_DISABLE_SHARED_GEMS set to false,
+# which installs/uses gems from their standard version (e.g.,
+# system ruby, rbenv version, etc).
+#
+# If you are using Docker or if you don't mind sharing gems
+# on a system, this is what you want. If you want to isolate
+# your application from others on your system, change this
+# to true
+#
 ---
 BUNDLE_BIN: "../bin"
-BUNDLE_DISABLE_SHARED_GEMS: "true"
+BUNDLE_DISABLE_SHARED_GEMS: "false"
 BUNDLE_PATH: "vendor/bundle"

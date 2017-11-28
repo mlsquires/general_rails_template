@@ -8,6 +8,9 @@ set up.
 and database references.
 1. Modify: Guardfile, .rubocop.yml
 1. Run ./script/create_database_user.sh
+1. If you are running the server in Docker
+  1. remove the .bundle and vendor/bundle directories
+  1. 
 
 
 # README
