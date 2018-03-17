@@ -2,8 +2,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%%= ENV['<%= app_name.upcase %>_DATABASE_USERNAME'] || 'BOGUS_USER' %>
-  password: <%%= ENV['<%= app_name.upcase %>_DATABASE_PASSWORD'] %>
+  username: <%%= ENV['<%= app_name.upcase %>_DATABASE_USERNAME'] || 'BogusUser' %>
+  password: <%%= ENV['<%= app_name.upcase %>_DATABASE_PASSWORD'] || 'BogusPassword' %>
   host: <%%= ENV['<%= app_name.upcase %>_DATABASE_HOST'] %>
   port: <%%= ENV['<%= app_name.upcase %>_DATABASE_PORT'] %>
 #  url: <%%= ENV['<%= app_name.upcase %>_DATABASE_URL'] %>

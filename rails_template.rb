@@ -46,7 +46,7 @@ copy_file "templates/gitignore", ".gitignore"
 remove_file "config/database.yml"
 template "templates/config/database.yml.tt", "config/database.yml"
 
-template "templates/Dockerfile.tt", "Dockerfile"
+# template "templates/Dockerfile.tt", "Dockerfile"
 
 after_bundle do
   # the .bundle/config has BUNDLE_DISABLE_SHARED_GEMS set to false,
@@ -58,8 +58,8 @@ after_bundle do
   # your application from others on your system, change this
   # to true
   #
-  empty_directory ".bundle"
-  copy_file "templates/bundle_config", ".bundle/config"
+#  empty_directory ".bundle"
+#  copy_file "templates/bundle_config", ".bundle/config"
 
   remove_dir "test"
 
@@ -104,11 +104,11 @@ after_bundle do
   chmod "script/create_database_user.sh", 0755
   template "templates/script/postgres_user_create.sql.tt", "script/postgres_user_create.sql"
 
-  # Health Check route
-  generate(:controller, "health index")
-  route "root to: \"health#index\""
+  empty_directory "spec/support"
+  copy_file "templates/spec/support/factory_bot.rb", "spec/support/factory_bot.rb"
 
-  git :init
-  git add: "."
-  git commit: "-a -m 'Initial commit'"
+
+#  git :init
+#  git add: "."
+#  git commit: "-a -m 'Initial commit'"
 end
