@@ -42,9 +42,11 @@ copy_file "templates/Gemfile", "Gemfile"
 
 remove_file ".gitignore"
 copy_file "templates/gitignore", ".gitignore"
+copy_file "templates/CHANGELOG.md", "CHANGELOG.md"
 
 remove_file "config/database.yml"
-template "templates/config/database.yml.tt", "config/database.yml"
+#template "templates/config/database_postgres.yml.tt", "config/database.yml"
+template "templates/config/database_mysql.yml.tt", "config/database.yml"
 
 # template "templates/Dockerfile.tt", "Dockerfile"
 
@@ -65,7 +67,6 @@ after_bundle do
 
   run "spring stop"
   generate "rspec:install"
-  generate "teaspoon:install"
   generate "serviceworker:install"
 
   run "bundle exec guard init"
@@ -74,28 +75,6 @@ after_bundle do
 
   template "templates/dotenv.tt", "dotenv.sample"
   template "templates/dotenv.tt", ".env"
-  prepend_to_file "dotenv.sample" do <<-EOF
-# https://github.com/bkeepers/dotenv
-#
-# Check this into git (with sensitive information replaced with bogus values)
-#
-# Perform any addition/deletion of keys in both ".env" and this file.
-#
-# This has example values for environment variables that the
-# application depends on. The actual values are in '.env',
-# and you never check that file in.
-#
-  EOF
-  end
-  prepend_to_file ".env" do <<-EOF
-# https://github.com/bkeepers/dotenv
-#
-# Perform any addition/deletion of keys in both this file and dotenv.sample
-#
-# NEVER EVER EVER check this file into source control
-#
-  EOF
-  end
 
   empty_directory "script"
   copy_file "templates/script/create_things.sh", "script/create_things.sh"

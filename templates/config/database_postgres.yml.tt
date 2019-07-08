@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%%= ENV['<%= app_name.upcase %>_DB_USERNAME'] || 'BogusUser' %>
+  password: <%%= ENV['<%= app_name.upcase %>_DB_PASSWORD'] || 'BogusPassword' %>
+  host: <%%= ENV['<%= app_name.upcase %>_DB_HOST'] || 'localhost' %>
+  port: <%%= ENV['<%= app_name.upcase %>_DB_PORT'] || '5432' %>
+
+development:
+  <<: *default
+  database: <%%= ENV['<%= app_name.upcase %>_DB_NAME'] || '<%= app_name %>_development'  %>
+
+test:
+  <<: *default
+  database: '<%= app_name %>_test'
+
+production:
+  <<: *default
+  database: <%%= ENV['<%= app_name.upcase %>_DB_NAME'] || '<%= app_name %>' %>

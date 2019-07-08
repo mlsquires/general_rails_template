@@ -1,13 +1,54 @@
+#
+# There is a trend toward using environment variables
+# to configure your application, rather than depending
+# on files checked in to source control. Heroku, Docker,
+# cloud vendors, etc typically provide this a part of
+# deploying your application.
+#
+# Check out this article for more details:
+# https://12factor.net/config
+#
+# Since our deployment mechanisms use environment variables
+# we want to use them when were developing as well.
+#
+# But manually setting those variables can be cumbersome.
+# A common approach is to have a file in the project root
+# that contains the variables for our development environment,
+# and making use of a "dotenv" library for your project framework.
+#
+# You create a file (".env") in the root directory of your
+# project with the variables your app needs. Do NOT
+# check this into your source code repository.
+#
+# To help other developers work with your application
+# it helps to have a file ("dotenv.sample") that is
+# checked into your source code repository with
+# the variables defined but with bogus values.
+#
+# Perform any addition/deletion of keys in both ".env"
+# and "dotenv.sample".
+#
+# https://github.com/bkeepers/dotenv
+#
+# Note: There are times when you may want to do a "source .env"
+# in your shell to bring these into your environment at the
+# shell level. However, not all "dotenv" implementations support
+# the initial export syntax. The shell "-a" option does an
+# export of all of the variables in the script. So an alias like this:
+#
+# alias senv=set -a; source .env; set +a
+#
+# allows you to get them into your shell without breaking
+# a dotenv implementation
+#
 
 # database
-export <%= app_name.upcase %>_DATABASE_USERNAME='<%= app_name %>_owner'
-export <%= app_name.upcase %>_DATABASE_PASSWORD='BogusPassword'
-export <%= app_name.upcase %>_DATABASE_NAME='<%= app_name %>_development'
-export <%= app_name.upcase %>_DATABASE_HOST='localhost'
-export <%= app_name.upcase %>_DATABASE_PORT=5432
-export <%= app_name.upcase %>_DATABASE_URL="postgres://$<%= app_name.upcase %>_DATABASE_USERNAME:$<%= app_name.upcase %>_DATABASE_PASSWORD@$<%= app_name.upcase %>_DATABASE_HOST/$<%= app_name.upcase %>_DATABASE_NAME"
+<%= app_name.upcase %>_DB_USERNAME=<%= app_name %>
+<%= app_name.upcase %>_DB_PASSWORD='BogusPassword'
+<%= app_name.upcase %>_DB_HOST=localhost
+<%= app_name.upcase %>_DB_PORT=5432
 
 # service settings
-export RAILS_ENV='development'
-export PORT=3000
+RAILS_ENV=development
+PORT=3000
 
