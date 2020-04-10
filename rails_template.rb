@@ -44,13 +44,7 @@ remove_file ".gitignore"
 copy_file "templates/gitignore", ".gitignore"
 copy_file "templates/CHANGELOG.md", "CHANGELOG.md"
 
-remove_file "config/database.yml"
-#template "templates/config/database_postgres.yml.tt", "config/database.yml"
-template "templates/config/database_mysql.yml.tt", "config/database.yml"
-
-# template "templates/Dockerfile.tt", "Dockerfile"
-
-after_bundle do
+# after_bundle do
   # the .bundle/config has BUNDLE_DISABLE_SHARED_GEMS set to false,
   # which installs/uses gems from their standard version (e.g.,
   # system ruby, rbenv version, etc).
@@ -60,18 +54,12 @@ after_bundle do
   # your application from others on your system, change this
   # to true
   #
-#  empty_directory ".bundle"
-#  copy_file "templates/bundle_config", ".bundle/config"
+  empty_directory ".bundle"
+  copy_file "templates/bundle_config", ".bundle/config"
 
   remove_dir "test"
 
-  run "spring stop"
-  generate "rspec:install"
-  generate "serviceworker:install"
-
-  run "bundle exec guard init"
-  remove_file ".rubocop.yml"
-  copy_file "templates/rubocop.yml", ".rubocop.yml"
+#  generate "rspec:install"
 
   template "templates/dotenv.tt", "dotenv.sample"
   template "templates/dotenv.tt", ".env"
@@ -79,9 +67,6 @@ after_bundle do
   empty_directory "script"
   copy_file "templates/script/create_things.sh", "script/create_things.sh"
   chmod "script/create_things.sh", 0755
-  copy_file "templates/script/create_database_user.sh", "script/create_database_user.sh"
-  chmod "script/create_database_user.sh", 0755
-  template "templates/script/postgres_user_create.sql.tt", "script/postgres_user_create.sql"
 
   empty_directory "spec/support"
   copy_file "templates/spec/support/factory_bot.rb", "spec/support/factory_bot.rb"
@@ -90,4 +75,4 @@ after_bundle do
 #  git :init
 #  git add: "."
 #  git commit: "-a -m 'Initial commit'"
-end
+# end

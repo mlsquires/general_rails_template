@@ -5,41 +5,19 @@ git_source(:github) do |repo_name|
   'https://github.com/#{repo_name}.git'
 end
 
-gem 'rails'
-gem 'pg'
-gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+gem 'rails', '=3.2.22.5'
 gem 'puma'
-gem 'slim-rails'
-gem 'uglifier'
-gem 'turbolinks'
-gem 'jbuilder'
-gem 'multi_json'
-gem 'serviceworker-rails'
 gem 'rake'
 gem 'dotenv-rails'
-gem 'graphql'
-gem 'multiverse'
-gem 'composite_primary_keys', '=11.1.0'
-gem 'lograge'
-gem 'logstash-event'
+gem 'awesome_print'
+gem 'test-unit'
 
 group :development, :test do
   gem 'listen'
   gem 'pry-rails'
-  gem 'guard'
   gem 'rspec-rails'
-  gem 'guard-rspec'
-  gem 'rubocop'
-  gem 'rubocop-rspec'
-  gem 'guard-rubocop'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'awesome_print'
   gem 'factory_bot_rails'
-  gem 'graphiql-rails'
-end
-
-group :development do
-  gem 'web-console'
+  gem 'test-unit'
 end
 
 group :test do
